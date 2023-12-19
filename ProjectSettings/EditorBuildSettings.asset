@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Game_regular.unity
+    guid: 48622ef2456e94ca2a37bba5b4a8703d
+  - enabled: 1
+    path: Assets/Scenes/Game_psych.unity
+    guid: bb88cbac4554448d69dce8fad9a11e9f
+  - enabled: 1
+    path: Assets/Scenes/Game_psych_night.unity
+    guid: 6d4c82baff12a46c4a92258d85b2594d
+  - enabled: 1
+    path: Assets/Scenes/Game_ending.unity
+    guid: 6f32ecb2d671c4b488e3a36427ff1a74
+  m_configObjects: {}
