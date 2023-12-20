@@ -1,10 +1,11 @@
+using AriozoneGames.Core;
 using AriozoneGames.Narrative;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace AriozoneGames.Interaction
 {
-    public class FillBucket : MonoBehaviour
+    public class FillBucket : MonoBehaviour, IInteractable
     {
         [SerializeField] private GameObject bucketWater;
         public UnityEvent inRangeEvent;
@@ -16,9 +17,12 @@ namespace AriozoneGames.Interaction
         public Narrator narrator;
         public AudioClip voiceLine;
 
+        public InteractType InteractType { get; set; }
+
         private void Start()
         {
             narrator = FindObjectOfType<Narrator>();
+            InteractType = InteractType.Activate;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -50,6 +54,17 @@ namespace AriozoneGames.Interaction
             {
                 outOfRangeEvent?.Invoke();
             }
+        }
+
+        public void Interact()
+        {
+            if (voiceLine != null)
+            {
+                narrator.PlayVoiceLine(voiceLine);
+            }
+            bucketWater.SetActive(true);
+            _bucketFilled = true;
+            filledUpEvent?.Invoke();
         }
     }
 }

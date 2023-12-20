@@ -1,10 +1,11 @@
+using AriozoneGames.Core;
 using AriozoneGames.Narrative;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace AriozoneGames.Interaction
 {
-    public class ItemPickUp : MonoBehaviour
+    public class ItemPickUp : MonoBehaviour, IInteractable
     {
         [SerializeField] private GameObject item;
         [SerializeField] private Transform parent;
@@ -20,10 +21,13 @@ namespace AriozoneGames.Interaction
         public AudioClip voiceLine;
         public Narrator narrator;
 
+        public InteractType InteractType { get; set; }
+
         private void Start()
         {
             _bucketRigidbody = item.GetComponent<Rigidbody>();
             narrator = FindObjectOfType<Narrator>();
+            InteractType = InteractType.Pickup;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -62,5 +66,22 @@ namespace AriozoneGames.Interaction
                 outOfRangeEvent?.Invoke();
             }
         }
+        
+
+        public void Interact()
+        {
+            if (voiceLine != null)
+            {
+                narrator.PlayVoiceLine(voiceLine);
+            }
+            item.transform.parent = parent;
+            item.transform.position = positionWithinParent.position;
+            _bucketRigidbody.useGravity = false;
+            _bucketRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            item.transform.rotation = positionWithinParent.rotation;
+            _pickedUp = true;
+            pickedUpEvent?.Invoke();
+        }
+        
     }
 }
