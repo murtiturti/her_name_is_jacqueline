@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,6 +24,45 @@ namespace AriozoneGames.Core
         public bool _isPaused;
 
         [FormerlySerializedAs("_gameStarted")] public bool gameStarted = false;
+
+        private static UIManager _instance;
+
+        public static UIManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType<UIManager>();
+
+                    if (FindObjectsOfType<UIManager>().Length > 1)
+                    {
+                        Debug.LogError("More than one instance of UIManager found");
+                        return _instance;
+                    }
+
+                    if (_instance == null)
+                    {
+                        GameObject singletonObject = new GameObject(typeof(UIManager).Name);
+                        _instance = singletonObject.AddComponent<UIManager>();
+                    }
+                }
+
+                return _instance;
+            }
+        }
+
+        private void Awake()
+        {
+            if (_instance == null)
+            {
+                _instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
 
         private void Start()
         {

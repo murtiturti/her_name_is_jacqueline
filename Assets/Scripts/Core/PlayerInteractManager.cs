@@ -37,7 +37,7 @@ namespace AriozoneGames.Core
             {
                 if (_isFrameOfSelection)
                 {
-                    //TODO: Send message to UI manager to show prompt
+                    UIManager.Instance.ShowPrompt();
                     _isFrameOfSelection = false;
                 }
 
@@ -46,8 +46,13 @@ namespace AriozoneGames.Core
                     if (CheckInteractConditions())
                     {
                         InteractWith(interactable);
+                        UIManager.Instance.HidePrompt();
                     }
                 }
+            }
+            else
+            {
+                UIManager.Instance.HidePrompt();
             }
         }
 
@@ -82,6 +87,14 @@ namespace AriozoneGames.Core
                         _isFrameOfSelection = false;
                     }
                 }
+                else
+                {
+                    _interactableSelected = false;
+                }
+            }
+            else
+            {
+                _interactableSelected = false;
             }
             return go;
         }

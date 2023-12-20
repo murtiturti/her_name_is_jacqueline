@@ -79,8 +79,6 @@ namespace AriozoneGames.Interaction
             _bucketRigidbody.useGravity = false;
             _bucketRigidbody.constraints = RigidbodyConstraints.FreezeAll;
             item.transform.rotation = positionWithinParent.rotation;
-            var col = item.GetComponent<Collider>();
-            col.enabled = false;
             _pickedUp = true;
             pickedUpEvent?.Invoke();
         }
