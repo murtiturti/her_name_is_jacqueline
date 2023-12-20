@@ -1,14 +1,23 @@
+using System;
+using AriozoneGames.Core;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace AriozoneGames.Interaction
 {
-    public class SitAt : MonoBehaviour
+    public class SitAt : MonoBehaviour, IInteractable
     {
         [SerializeField] private Transform sitPosition;
         [SerializeField] private GameObject toSit;
         public UnityEvent inRange, sitting, outOfRange;
         private bool _isSitting;
+
+        public InteractType InteractType { get; set; }
+
+        private void Start()
+        {
+            InteractType = InteractType.TranslatePlayer;
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -39,6 +48,16 @@ namespace AriozoneGames.Interaction
             {
                 outOfRange?.Invoke();
             }
+        }
+
+        public void Interact()
+        {
+            sitting?.Invoke();
+            _isSitting = true;
+            toSit.transform.position = sitPosition.position;
+            toSit.transform.rotation = sitPosition.rotation;
+            var colliderTarget = GetComponent<BoxCollider>();
+            colliderTarget.enabled = false;
         }
     }
 }

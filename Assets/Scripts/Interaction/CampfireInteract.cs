@@ -1,10 +1,11 @@
+using AriozoneGames.Core;
 using AriozoneGames.Narrative;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace AriozoneGames.Interaction
 {
-    public class CampfireInteract : MonoBehaviour
+    public class CampfireInteract : MonoBehaviour, IInteractable
     {
         public UnityEvent inRange, lit, outOfRange;
 
@@ -13,9 +14,12 @@ namespace AriozoneGames.Interaction
         public Narrator narrator;
         public AudioClip voiceLine;
 
+        public InteractType InteractType { get; set; }
+
         private void Start()
         {
             narrator = FindObjectOfType<Narrator>();
+            InteractType = InteractType.Activate;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -45,6 +49,16 @@ namespace AriozoneGames.Interaction
             if (other.CompareTag("Player"))
             {
                 outOfRange?.Invoke();
+            }
+        }
+
+        public void Interact()
+        {
+            lit?.Invoke();
+            _isLit = true;
+            if (voiceLine != null)
+            {
+                narrator.PlayVoiceLine(voiceLine);
             }
         }
     }
