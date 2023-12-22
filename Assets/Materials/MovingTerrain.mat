@@ -106,10 +106,13 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _ColorLerpSpeed: 0.8
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DirtNoiseScale: 1000
+    - _DirtNoiseSpeed: 0.0015
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -117,8 +120,10 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NoiseScale: 5.38
+    - _NoiseScale: 48.2
+    - _NoiseSpeed: 0.005
     - _OcclusionStrength: 1
+    - _OutlineFactor: 1.82
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -135,5 +140,8 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GrassColorMultiplier: {r: 0.90588236, g: 0.39607844, b: 0.39607844, a: 1}
+    - _GrassNoiseRippleColor: {r: 5.812186, g: 0.9047271, b: 1.3236561, a: 1}
+    - _GrassNoiseRippleColorAlt: {r: 1.3797404, g: 0.20175448, b: 0.30293146, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
