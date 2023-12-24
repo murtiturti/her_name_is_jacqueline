@@ -180,6 +180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6425733563535264273}
   - component: {fileID: 2267233696255688032}
+  - component: {fileID: 7065083836163880869}
   m_Layer: 0
   m_Name: tree_normal_LODs_FBX
   m_TagString: Untagged
@@ -232,6 +233,29 @@ LODGroup:
     renderers:
     - renderer: {fileID: 8583006382697931696}
   m_Enabled: 1
+--- !u!136 &7065083836163880869
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5937743277139906731}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1708175
+  m_Height: 7.2290483
+  m_Direction: 1
+  m_Center: {x: -0.007243395, y: 3.5954912, z: -0.0012397617}
 --- !u!1 &8314086878422245558
 GameObject:
   m_ObjectHideFlags: 0
