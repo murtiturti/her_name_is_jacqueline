@@ -1,50 +1,35 @@
+using AriozoneGames.Core;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace AriozoneGames.Interaction
 {
-    public class WaterJacqueline : MonoBehaviour
+    public class WaterJacqueline : MonoBehaviour, IInteractable
     {
-        public UnityEvent inRangeEvent, outOfRangeEvent, wateredEvent;
+        public UnityEvent wateredEvent;
         public GameObject bucket;
         private Rigidbody _bucketRb;
         private bool _watered = false;
 
+        public InteractType InteractType { get; set; }
+        public bool IsInteractionEnabled { get; set; }
+
         private void Start()
         {
+            InteractType = InteractType.StoryAdvance;
+            IsInteractionEnabled = false;
             _bucketRb = bucket.GetComponent<Rigidbody>();
         }
 
-        private void OnTriggerEnter(Collider other)
+        public void Interact()
         {
-            if (other.CompareTag("Player") && !_watered)
-            {
-                inRangeEvent?.Invoke();
-            }
-        }
-
-        private void OnTriggerStay(Collider other)
-        {
-            if (other.CompareTag("Player") && !_watered)
-            {
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    wateredEvent?.Invoke();
-                    _watered = true;
-                    _bucketRb.constraints = RigidbodyConstraints.None;
-                    bucket.transform.parent = null;
-                    _bucketRb.AddForce(new Vector3(Random.Range(0.3f, 1f), Random.Range(0.3f, 2f), Random.Range(0.3f, 1f)));
-                }
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                outOfRangeEvent?.Invoke();
-            }
+            wateredEvent?.Invoke();
+            _watered = true;
+            _bucketRb.constraints = RigidbodyConstraints.None;
+            bucket.transform.parent = null;
+            _bucketRb.AddForce(new Vector3(Random.Range(0.3f, 1f), Random.Range(3f, 7.5f), Random.Range(0.3f, 1f)));
+            _bucketRb.AddTorque(new Vector3(0f, 0f, Random.Range(0.5f, 1.5f)));
         }
     }
 }

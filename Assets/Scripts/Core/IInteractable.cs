@@ -8,5 +8,6 @@ namespace AriozoneGames.Core
     {
         InteractType InteractType { get; set; }
         void Interact();
+        bool IsInteractionEnabled { get; set; }
     }
 }

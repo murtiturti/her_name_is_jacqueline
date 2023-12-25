@@ -13,10 +13,12 @@ namespace AriozoneGames.Interaction
         private bool _isSitting;
 
         public InteractType InteractType { get; set; }
+        public bool IsInteractionEnabled { get; set; }
 
         private void Start()
         {
             InteractType = InteractType.TranslatePlayer;
+            IsInteractionEnabled = false;
         }
 
         private void OnTriggerEnter(Collider other)

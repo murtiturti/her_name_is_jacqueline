@@ -22,12 +22,14 @@ namespace AriozoneGames.Interaction
         public Narrator narrator;
 
         public InteractType InteractType { get; set; }
+        public bool IsInteractionEnabled { get; set; }
 
         private void Start()
         {
             _bucketRigidbody = item.GetComponent<Rigidbody>();
             narrator = FindObjectOfType<Narrator>();
             InteractType = InteractType.Pickup;
+            IsInteractionEnabled = true;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -79,6 +81,7 @@ namespace AriozoneGames.Interaction
             _bucketRigidbody.useGravity = false;
             _bucketRigidbody.constraints = RigidbodyConstraints.FreezeAll;
             item.transform.rotation = positionWithinParent.rotation;
+            item.GetComponent<Collider>().enabled = false;
             _pickedUp = true;
             pickedUpEvent?.Invoke();
         }
