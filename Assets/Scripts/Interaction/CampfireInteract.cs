@@ -15,11 +15,13 @@ namespace AriozoneGames.Interaction
         public AudioClip voiceLine;
 
         public InteractType InteractType { get; set; }
+        public bool IsInteractionEnabled { get; set; }
 
         private void Start()
         {
             narrator = FindObjectOfType<Narrator>();
             InteractType = InteractType.Activate;
+            IsInteractionEnabled = false;
         }
 
         private void OnTriggerEnter(Collider other)

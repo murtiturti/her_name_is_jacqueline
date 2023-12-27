@@ -85,9 +85,10 @@ namespace AriozoneGames.Core
             if (Physics.Raycast(ray, out RaycastHit hit, range))
             {
                 // Hit a collider
-                var interactable = hit.collider.GetComponent<IInteractable>();
+                var interactableObject = hit.collider.gameObject;
+                var interactable = interactableObject.GetComponent<IInteractable>();
                 // If the target is interactable
-                if (interactable != null)
+                if (interactable != null && interactable.IsInteractionEnabled)
                 {
                     go = interactable;
                     _interactableSelected = true;
@@ -129,7 +130,12 @@ namespace AriozoneGames.Core
 
             if (type == InteractType.TranslatePlayer)
             {
-                return !_isHandsFull;
+                return true;
+            }
+
+            if (type == InteractType.StoryAdvance)
+            {
+                return true;
             }
 
             return false;
