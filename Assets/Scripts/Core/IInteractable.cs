@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using AriozoneGames.ScriptableObjects;
 using UnityEngine;
 
 namespace AriozoneGames.Core

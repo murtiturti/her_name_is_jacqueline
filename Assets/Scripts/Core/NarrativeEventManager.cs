@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using AriozoneGames.ScriptableObjects;
+using AriozoneGames.Narrative;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,48 +9,53 @@ namespace AriozoneGames.Core
 {
     public class NarrativeEventManager : MonoBehaviour
     {
-        private Dictionary<string, NarrativeEvent> _eventDictionary;
-
-        #region Singleton Pattern
-        private static NarrativeEventManager _instance;
-        public static NarrativeEventManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new GameObject("NarrativeEventManager").AddComponent<NarrativeEventManager>();
-                }
-
-                return _instance;
-            }
-        }
+        #region NodeData
+            [SerializeField]
+            private List<NarrativeNode> narrativeEventChain = new List<NarrativeNode>();
+            private NarrativeNode _currentNode;
         #endregion
         
-        private void Awake()
-        {
-            if (_eventDictionary == null)
+        #region Singleton Pattern
+            private static NarrativeEventManager _instance;
+            public static NarrativeEventManager Instance
             {
-                _eventDictionary = new Dictionary<string, NarrativeEvent>();
+                get
+                {
+                    if (_instance == null)
+                    {
+                        _instance = FindObjectOfType<NarrativeEventManager>();
+                        if (_instance == null)
+                        {
+                            GameObject go = new GameObject("NarrativeEventManager");
+                            _instance = go.AddComponent<NarrativeEventManager>();
+                        }
+                    }
+
+                    return _instance;
+                }
             }
+        #endregion
+
+        private void Start()
+        {
+            _currentNode = narrativeEventChain[0];
         }
 
-        public void TriggerEvent(NarrativeEvent narrativeEvent)
+        public void TriggerEvent(NarrativeNode narrativeNode)
         {
-            narrativeEvent.onTriggerEvent.Invoke();
+            narrativeNode.nodeEvent.onTriggerEvent.Invoke();
+            _currentNode = narrativeNode;
+            SetUpNextNodes();
         }
 
-        public void TriggerEvent(string eventId)
+        
+        private void SetUpNextNodes()
         {
-            if (_eventDictionary.TryGetValue(eventId, out var narrativeEvent))
+            var nextNodes = _currentNode.linkedNodes;
+            foreach (var node in nextNodes)
             {
-                narrativeEvent.onTriggerEvent.Invoke();
+                node.prepEvent?.Invoke();
             }
-        }
-
-        public void AddEvent(string key, NarrativeEvent narrativeEvent)
-        {
-            _eventDictionary.TryAdd(key, narrativeEvent);
         }
     }
 }
