@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using AriozoneGames.Narrative;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace AriozoneGames.Core
 {
@@ -11,8 +12,7 @@ namespace AriozoneGames.Core
     {
         #region NodeData
             [SerializeField]
-            private List<NarrativeNode> narrativeEventChain = new List<NarrativeNode>();
-            private NarrativeNode _currentNode;
+            private List<EventChainLink> narrativeEventChains = new List<EventChainLink>();
         #endregion
         
         #region Singleton Pattern
@@ -38,24 +38,13 @@ namespace AriozoneGames.Core
 
         private void Start()
         {
-            _currentNode = narrativeEventChain[0];
+
         }
 
         public void TriggerEvent(NarrativeNode narrativeNode)
         {
-            narrativeNode.InvokeNodeEvent();
-            _currentNode = narrativeNode;
-            SetUpNextNodes();
+
         }
 
-
-        private void SetUpNextNodes()
-        {
-            var nextNodes = _currentNode.linkedNodes;
-            foreach (var node in nextNodes)
-            {
-                node.PrepNode();
-            }
-        }
     }
 }
