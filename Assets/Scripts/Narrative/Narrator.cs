@@ -30,6 +30,11 @@ namespace AriozoneGames.Narrative
             yield return new WaitForSeconds(_source.clip.length);
             onVoiceLineEnd?.Invoke();
         }
+
+        public void SetVolume(float volumeLevel)
+        {
+            _source.volume = volumeLevel;
+        }
     
     }
 }

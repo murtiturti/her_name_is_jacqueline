@@ -43,18 +43,18 @@ namespace AriozoneGames.Core
 
         public void TriggerEvent(NarrativeNode narrativeNode)
         {
-            narrativeNode.nodeEvent.onTriggerEvent.Invoke();
+            narrativeNode.InvokeNodeEvent();
             _currentNode = narrativeNode;
             SetUpNextNodes();
         }
 
-        
+
         private void SetUpNextNodes()
         {
             var nextNodes = _currentNode.linkedNodes;
             foreach (var node in nextNodes)
             {
-                node.prepEvent?.Invoke();
+                node.PrepNode();
             }
         }
     }
