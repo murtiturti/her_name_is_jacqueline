@@ -1439,22 +1439,22 @@ PrefabInstance:
     - target: {fileID: 5126527961139664760, guid: 035bf1ba97d19214580cfe6f5a29fdc3,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9173143
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5126527961139664760, guid: 035bf1ba97d19214580cfe6f5a29fdc3,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.27483404
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5126527961139664760, guid: 035bf1ba97d19214580cfe6f5a29fdc3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.27597836
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5126527961139664760, guid: 035bf1ba97d19214580cfe6f5a29fdc3,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.082685135
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5126527961139664767, guid: 035bf1ba97d19214580cfe6f5a29fdc3,
         type: 3}
@@ -31777,7 +31777,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4cc164cb844411a889f407e0cbcf09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  narrativeEventChains: []
+  narrativeEventChains:
+  - {fileID: 1837001866}
+  - {fileID: 1181018872}
 --- !u!4 &1166532699
 Transform:
   m_ObjectHideFlags: 0

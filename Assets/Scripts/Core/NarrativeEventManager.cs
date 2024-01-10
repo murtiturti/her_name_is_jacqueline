@@ -12,7 +12,7 @@ namespace AriozoneGames.Core
     {
         #region NodeData
             [SerializeField]
-            private List<EventChainLink> narrativeEventChains = new List<EventChainLink>();
+            private List<NarrativeNode> narrativeEventChains = new List<NarrativeNode>();
         #endregion
         
         #region Singleton Pattern
@@ -41,9 +41,9 @@ namespace AriozoneGames.Core
 
         }
 
-        public void TriggerEvent(NarrativeNode narrativeNode)
+        public void TriggerEvent(int index)
         {
-
+            narrativeEventChains[index].StartChain();
         }
 
     }

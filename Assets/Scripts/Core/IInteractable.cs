@@ -8,8 +8,6 @@ namespace AriozoneGames.Core
 {
     public interface IInteractable
     {
-        InteractType InteractType { get; set; }
-        void Interact(); //TODO: Add parameter NarrativeNode
-        bool IsInteractionEnabled { get; set; }
+        void Interact();
     }
 }

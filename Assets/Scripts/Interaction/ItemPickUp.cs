@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace AriozoneGames.Interaction
 {
-    public class ItemPickUp : MonoBehaviour, IInteractable
+    public class ItemPickUp : InteractableObject, IInteractable
     {
         [SerializeField] private GameObject item;
         [SerializeField] private Transform parent;
@@ -20,9 +20,7 @@ namespace AriozoneGames.Interaction
 
         public AudioClip voiceLine;
         public Narrator narrator;
-
-        public InteractType InteractType { get; set; }
-        public bool IsInteractionEnabled { get; set; }
+        
 
         private void Start()
         {

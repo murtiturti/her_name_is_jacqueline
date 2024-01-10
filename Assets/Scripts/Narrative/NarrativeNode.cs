@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 namespace AriozoneGames.Narrative
 {
+    [RequireComponent(typeof(EventChainLink))]
     public abstract class NarrativeNode : MonoBehaviour
     {
         /*
@@ -21,5 +22,13 @@ namespace AriozoneGames.Narrative
         }
 
         public abstract void StartChain();
+
+        protected void RunChainedEvents()
+        {
+            foreach (var chainedEvent in Link.ChainedNodes)
+            {
+                chainedEvent.StartChain();
+            }
+        }
     }
 }

@@ -2,23 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using AriozoneGames.Core;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AriozoneGames.Narrative
 {
     public class InteractNode : NarrativeNode
     {
-        private IInteractable _interactable;
+        public int[] toggleOnInteractionIds;
+        public bool toggleValue;
 
-        new void Start()
-        {
-            base.Start();
-            _interactable = GetComponent<IInteractable>();
-        }
-        
         public override void StartChain()
         {
-            _interactable.Interact();
-            //TODO: Implement the chain
+            Link.LinkEvent?.Invoke();
+            PlayerInteractManager.Instance.ToggleObjectsById(toggleOnInteractionIds, toggleValue);
+            RunChainedEvents();
         }
     }
 }

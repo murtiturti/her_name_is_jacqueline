@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace AriozoneGames.Narrative
 {
-    [RequireComponent(typeof(Collider))]
     public class VoiceOverNode : NarrativeNode
     {
         public AudioClip voiceClip;
