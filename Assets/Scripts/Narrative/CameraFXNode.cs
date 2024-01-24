@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 namespace AriozoneGames.Narrative
 {
-    public class CameraFXNode : NarrativeNode
+    public class CameraFXNode : FXNode
     {
         [SerializeField]
         private GameObject cameraGameObject;
@@ -12,13 +13,18 @@ namespace AriozoneGames.Narrative
         [SerializeField]
         private bool turnOn;
 
-        [SerializeField] 
+        [SerializeField]
         private float blendDuration;
         public override void StartChain()
         {
+            Link.LinkEvent?.Invoke();
             if (turnOn)
             {
                 cameraGameObject.SetActive(true);
+            }
+            else
+            {
+                cameraGameObject.SetActive(false);
             }
 
             StartCoroutine(Co_WaitForBlendEnd());

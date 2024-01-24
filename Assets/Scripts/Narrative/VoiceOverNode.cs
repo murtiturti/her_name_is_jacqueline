@@ -10,12 +10,6 @@ namespace AriozoneGames.Narrative
     {
         public AudioClip voiceClip;
 
-        new void Start()
-        {
-            base.Start();
-            narrator.onVoiceLineEnd.AddListener(OnVoiceLineEnd);
-        }
-
         private void OnTriggerEnter(Collider other)
         {
             StartChain();
@@ -29,6 +23,8 @@ namespace AriozoneGames.Narrative
 
         public override void StartChain()
         {
+            Link.LinkEvent?.Invoke();
+            narrator.onVoiceLineEnd.AddListener(OnVoiceLineEnd);
             narrator.PlayVoiceLine(voiceClip);
         }
 
@@ -38,7 +34,7 @@ namespace AriozoneGames.Narrative
             {
                 chainLink.StartChain();
             }
-            narrator.onVoiceLineEnd.RemoveListener(OnVoiceLineEnd);
+            narrator.onVoiceLineEnd?.RemoveListener(OnVoiceLineEnd);
         }
     }
 }

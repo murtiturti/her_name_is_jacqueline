@@ -4,14 +4,22 @@ using UnityEngine.Events;
 
 namespace AriozoneGames.Effects
 {
-    public class Blink : MonoBehaviour
+    public class Blink : IndefiniteFX
     {
         [SerializeField] private GameObject eyelidTop; // 2.3 to y=0.47
         [SerializeField] private GameObject eyelidBottom; // 0.73 to y=-0.47
-        public float delayForBlink = 4f;
         public UnityEvent closeEvent, openEvent;
 
         private bool _blink = false;
+        
+        private enum BlinkType
+        {
+            Open,
+            Close,
+            Blink
+        }
+
+        [SerializeField] private BlinkType blinkType;
 
         public void Close()
         {
@@ -25,10 +33,26 @@ namespace AriozoneGames.Effects
             StartCoroutine(OpenEyes());
         }
 
+        public override void PlayFX()
+        {
+            if (blinkType ==  BlinkType.Open)
+            {
+                Open();
+            }
+            else if (blinkType == BlinkType.Close)
+            {
+                Close();
+            }
+            else
+            {
+                BlinkEyes();
+            }
+        }
+
         private IEnumerator CloseEyes()
         {
             var delayTimer = 0f;
-            while (delayTimer < delayForBlink)
+            while (delayTimer < fxStartDelay)
             {
                 delayTimer += Time.deltaTime;
                 yield return null;
@@ -46,12 +70,17 @@ namespace AriozoneGames.Effects
                 yield return null;
             }
             closeEvent?.Invoke();
+            if (blinkType == BlinkType.Close)
+            {
+                onEventComplete?.Invoke();
+            }
+            
         }
 
         private IEnumerator OpenEyes()
         {
             var delayTimer = 0f;
-            while (delayTimer < delayForBlink)
+            while (delayTimer < fxStartDelay)
             {
                 delayTimer += Time.deltaTime;
                 yield return null;
@@ -76,6 +105,11 @@ namespace AriozoneGames.Effects
             if (_blink)
             {
                 closeEvent.RemoveListener(Open);
+            }
+
+            if (blinkType == BlinkType.Open)
+            {
+                onEventComplete?.Invoke();
             }
         }
 

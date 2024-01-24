@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AriozoneGames.Effects
 {
-    public class WindSoundFX : MonoBehaviour
+    public class WindSoundFX : IndefiniteFX
     {
         private AudioSource _audioSource;
 
@@ -19,6 +19,11 @@ namespace AriozoneGames.Effects
         {
             _audioSource = GetComponent<AudioSource>();
             _initialPitch = _audioSource.pitch;
+        }
+
+        public override void PlayFX()
+        {
+            WindFX();
         }
 
         public void WindFX()

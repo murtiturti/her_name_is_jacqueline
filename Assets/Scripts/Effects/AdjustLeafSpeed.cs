@@ -3,16 +3,19 @@ using UnityEngine;
 
 namespace AriozoneGames.Effects
 {
-    public class AdjustLeafSpeed : MonoBehaviour
+    public class AdjustLeafSpeed : DefiniteFX
     {
         public float leafSpeed = 1f;
-        public float speedUpDuration = 2f;
-
         private ParticleSystem _particleSystem;
 
         private void Start()
         {
             _particleSystem = GetComponent<ParticleSystem>();
+        }
+
+        public override void PlayFX()
+        {
+            IncreaseSpeed();
         }
 
         public void IncreaseSpeed()
@@ -22,6 +25,8 @@ namespace AriozoneGames.Effects
 
         private IEnumerator SpeedUpLeaves()
         {
+            yield return new WaitForSeconds(fxStartDelay);
+            
             ParticleSystem.Particle[] particles =
                 new ParticleSystem.Particle[_particleSystem.particleCount];
             var particleCount =_particleSystem.GetParticles(particles);
@@ -35,7 +40,7 @@ namespace AriozoneGames.Effects
             emissionModule.rateOverTime = 50f;
             var mainModule = _particleSystem.main;
             mainModule.startSpeed = leafSpeed;
-            while (speedUpTimer < speedUpDuration)
+            while (speedUpTimer < fxDuration)
             {
                 speedUpTimer += Time.deltaTime;
                 yield return null;
