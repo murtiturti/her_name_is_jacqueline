@@ -5,10 +5,7 @@ namespace AriozoneGames.Narrative
         public override void StartChain()
         {
             Link.LinkEvent?.Invoke();
-            foreach (var chainLink in Link.ChainedNodes)
-            {
-                chainLink.StartChain();
-            }
+            RunChainedEvents();
         }
     }
 }
