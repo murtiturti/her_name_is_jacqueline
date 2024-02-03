@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace AriozoneGames.Interaction
 {
-    public class FillBucket : MonoBehaviour, IInteractable
+    public class FillBucket : InteractableObject, IInteractable
     {
         [SerializeField] private GameObject bucketWater;
         public UnityEvent inRangeEvent;
@@ -16,9 +16,6 @@ namespace AriozoneGames.Interaction
 
         public Narrator narrator;
         public AudioClip voiceLine;
-
-        public InteractType InteractType { get; set; }
-        public bool IsInteractionEnabled { get; set; }
 
         private void Start()
         {

@@ -5,15 +5,12 @@ using UnityEngine.Events;
 
 namespace AriozoneGames.Interaction
 {
-    public class SitAt : MonoBehaviour, IInteractable
+    public class SitAt : InteractableObject, IInteractable
     {
         [SerializeField] private Transform sitPosition;
         [SerializeField] private GameObject toSit;
         public UnityEvent inRange, sitting, outOfRange;
         private bool _isSitting;
-
-        public InteractType InteractType { get; set; }
-        public bool IsInteractionEnabled { get; set; }
 
         private void Start()
         {

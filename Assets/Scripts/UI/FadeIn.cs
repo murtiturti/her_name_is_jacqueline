@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace AriozoneGames.Effects
+namespace AriozoneGames.UI
 {
     public class FadeIn : MonoBehaviour
     {

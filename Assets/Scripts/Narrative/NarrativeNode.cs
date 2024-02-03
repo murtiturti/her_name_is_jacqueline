@@ -6,32 +6,29 @@ using UnityEngine.Events;
 
 namespace AriozoneGames.Narrative
 {
-    public class NarrativeNode : MonoBehaviour
+    [RequireComponent(typeof(EventChainLink))]
+    public abstract class NarrativeNode : MonoBehaviour
     {
         /*
          * Base class for narrative nodes, DON'T use instances
-         */
-        [SerializeField]
-        private UnityEvent nodeEvent;
-        [SerializeField]
-        private UnityEvent prepEvent;
-        public List<NarrativeNode> linkedNodes = new List<NarrativeNode>();
-
+        */
+        protected EventChainLink Link;
         public Narrator narrator;
 
-        private void Start()
+        protected void Start()
         {
             narrator = FindObjectOfType<Narrator>();
+            Link = GetComponent<EventChainLink>();
         }
 
-        public void InvokeNodeEvent()
-        {
-            nodeEvent?.Invoke();
-        }
+        public abstract void StartChain();
 
-        public void PrepNode()
+        protected void RunChainedEvents()
         {
-            prepEvent.Invoke();
+            foreach (var chainedEvent in Link.ChainedNodes)
+            {
+                chainedEvent.StartChain();
+            }
         }
     }
 }

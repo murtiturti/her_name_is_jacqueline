@@ -4,9 +4,8 @@ using UnityEngine.Events;
 
 namespace AriozoneGames.Effects
 {
-    public class FireDieOut : MonoBehaviour
+    public class FireDieOut : DefiniteFX
     {
-        public float duration;
         public UnityEvent dieOutEvent;
 
         [SerializeField] private ParticleSystem light;
@@ -15,7 +14,12 @@ namespace AriozoneGames.Effects
         {
             StartCoroutine(Shrink());
         }
-    
+
+        public override void PlayFX()
+        {
+            BlowOut();
+        }
+
         private IEnumerator Shrink()
         {
             var elapsedTime = 0f;
@@ -26,10 +30,10 @@ namespace AriozoneGames.Effects
             var currIntensity = lightsModule.intensityMultiplier;
             var targetIntensity = 0f;
 
-            while (elapsedTime < duration)
+            while (elapsedTime < fxDuration)
             {
-                transform.localScale = Vector3.Lerp(currScale, targetScale, elapsedTime / duration);
-                lightsModule.intensityMultiplier = Mathf.Lerp(lightsModule.intensityMultiplier, 0f, elapsedTime / duration);
+                transform.localScale = Vector3.Lerp(currScale, targetScale, elapsedTime / fxDuration);
+                lightsModule.intensityMultiplier = Mathf.Lerp(lightsModule.intensityMultiplier, 0f, elapsedTime / fxDuration);
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }

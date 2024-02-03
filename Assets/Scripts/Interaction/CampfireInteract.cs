@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace AriozoneGames.Interaction
 {
-    public class CampfireInteract : MonoBehaviour, IInteractable
+    public class CampfireInteract : InteractableObject, IInteractable
     {
         public UnityEvent inRange, lit, outOfRange;
 
@@ -13,9 +13,6 @@ namespace AriozoneGames.Interaction
 
         public Narrator narrator;
         public AudioClip voiceLine;
-
-        public InteractType InteractType { get; set; }
-        public bool IsInteractionEnabled { get; set; }
 
         private void Start()
         {

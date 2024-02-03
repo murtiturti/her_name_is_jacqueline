@@ -5,15 +5,13 @@ using Random = UnityEngine.Random;
 
 namespace AriozoneGames.Interaction
 {
-    public class WaterJacqueline : MonoBehaviour, IInteractable
+    public class WaterJacqueline : InteractableObject, IInteractable
     {
         public UnityEvent wateredEvent;
         public GameObject bucket;
         private Rigidbody _bucketRb;
         private bool _watered = false;
-
-        public InteractType InteractType { get; set; }
-        public bool IsInteractionEnabled { get; set; }
+        
 
         private void Start()
         {
